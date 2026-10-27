@@ -1,0 +1,18 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+  - name: order-api-service
+    url: http://host.docker.internal:5280/orders
+    routes:
+      - name: order-api-route
+        paths:
+          - /api/orders
+        strip_path: true
+        plugins:
+          - name: rate-limiting
+            config:
+              minute: 5
+              policy: local
+              limit_by: ip
+              hide_client_headers: false
