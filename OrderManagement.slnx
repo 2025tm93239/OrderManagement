@@ -1,0 +1,27 @@
+<Solution>
+  <Project Path="OrderApi/OrderApi.csproj" />
+  <Project Path="OrderMcpServer/OrderMcpServer.csproj" />
+  <Folder Name="/schemas/">
+    <File Path="schemas/order_api-tool-schema.json" />
+  </Folder>
+  <Folder Name="/kong/">
+    <File Path="kong/docker-compose.yml" />
+    <File Path="kong/kong.yml" />
+    <File Path="kong/setup-kong-admin.ps1" />
+  </Folder>
+  <Folder Name="/scripts/">
+    <File Path="scripts/demo-rate-limit.ps1" />
+    <File Path="scripts/demo_rate_limit.py" />
+    <File Path="scripts/setup_kong.ps1" />
+    <File Path="scripts/setup_kong.sh" />
+  </Folder>
+  <Folder Name="/api/">
+    <File Path="api/main.py" />
+  </Folder>
+  <Folder Name="/mcp_server/">
+    <File Path="mcp_server/__init__.py" />
+    <File Path="mcp_server/__main__.py" />
+    <File Path="mcp_server/order_tool_schema.json" />
+    <File Path="mcp_server/server.py" />
+  </Folder>
+</Solution>
