@@ -1,0 +1,19 @@
+@OrderApi_HostAddress = http://localhost:5280
+
+### Create order
+POST {{OrderApi_HostAddress}}/orders
+Content-Type: application/json
+
+{
+  "item": "Notebook",
+  "quantity": 2
+}
+
+### Get order by id
+GET {{OrderApi_HostAddress}}/orders/1
+
+### List orders
+GET {{OrderApi_HostAddress}}/orders
+
+### Via Kong (after gateway is running)
+GET http://localhost:8000/api/orders
