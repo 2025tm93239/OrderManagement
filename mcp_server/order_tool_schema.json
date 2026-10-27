@@ -1,0 +1,37 @@
+{
+  "name": "order_api",
+  "description": "Create, fetch, and list orders via the Order REST API (through Kong gateway).",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "string",
+        "enum": ["create_order", "get_order", "list_orders"],
+        "description": "Which Order API operation to perform."
+      },
+      "item": {
+        "type": "string",
+        "description": "Product name (required for create_order)."
+      },
+      "quantity": {
+        "type": "integer",
+        "description": "Number of units (required for create_order, must be > 0)."
+      },
+      "id": {
+        "type": "integer",
+        "description": "Order id (required for get_order)."
+      }
+    },
+    "required": ["action"],
+    "allOf": [
+      {
+        "if": { "properties": { "action": { "const": "create_order" } } },
+        "then": { "required": ["item", "quantity"] }
+      },
+      {
+        "if": { "properties": { "action": { "const": "get_order" } } },
+        "then": { "required": ["id"] }
+      }
+    ]
+  }
+}
