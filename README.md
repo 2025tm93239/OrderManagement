@@ -258,3 +258,30 @@ Tool schema (deliverable): `schemas/order_api-tool-schema.json`
 3. `schemas/order_api-tool-schema.json`  
 4. `kong/kong.yml` (+ optional `kong/setup-kong-admin.ps1`)  
 5. Screenshot/log of rate limiting (PowerShell commands above or `scripts/demo-rate-limit.ps1`)
+
+---
+
+## Demo video
+
+Local file: [`Screenshots and Demo video/Question 2 Short Demos Recording.mp4`](./Screenshots%20and%20Demo%20video/Question%202%20Short%20Demos%20Recording.mp4)
+
+After you push to GitHub, open the `.mp4` from the repo file view to stream or download. For a shareable link in reports, upload the same file to Drive/OneDrive and paste that URL here if needed.
+
+## Screenshots
+
+Folder: [`Screenshots and Demo video/`](./Screenshots%20and%20Demo%20video/)
+
+| | |
+|:---:|:---:|
+| ![Picture 9](./Screenshots%20and%20Demo%20video/Picture9.png) | ![Picture 10](./Screenshots%20and%20Demo%20video/Picture10.png) |
+| ![Picture 11](./Screenshots%20and%20Demo%20video/Picture11.png) | ![Picture 12](./Screenshots%20and%20Demo%20video/Picture12.png) |
+| ![Picture 13](./Screenshots%20and%20Demo%20video/Picture13.png) | ![Picture 14](./Screenshots%20and%20Demo%20video/Picture14.png) |
+| ![Picture 15](./Screenshots%20and%20Demo%20video/Picture15.png) | ![Picture 16](./Screenshots%20and%20Demo%20video/Picture16.png) |
+| ![Picture 17](./Screenshots%20and%20Demo%20video/Picture17.png) | ![Picture 18](./Screenshots%20and%20Demo%20video/Picture18.png) |
+| ![Picture 19](./Screenshots%20and%20Demo%20video/Picture19.png) | ![Picture 20](./Screenshots%20and%20Demo%20video/Picture20.png) |
+| ![Picture 21](./Screenshots%20and%20Demo%20video/Picture21.png) | ![Picture 22](./Screenshots%20and%20Demo%20video/Picture22.png) |
+| ![Picture 23](./Screenshots%20and%20Demo%20video/Picture23.png) | ![Picture 24](./Screenshots%20and%20Demo%20video/Picture24.png) |
+
+![Picture 25](./Screenshots%20and%20Demo%20video/Picture25.png)
+
+![Picture 34](./Screenshots%20and%20Demo%20video/Picture34.png)
