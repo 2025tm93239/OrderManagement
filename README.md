@@ -19,6 +19,27 @@ Flow: **LLM → MCP client → MCP server → Kong (`/api/orders`) → Order API
 
 Replace `D:\Bits-pilani\API\OrderManagement` below if your clone lives elsewhere.
 
+## Question 2 — assignment parts
+
+| Part | What you build | How you test (this README) |
+|------|----------------|----------------------------|
+| **A** | REST Order API (`POST/GET /orders`) | [§2](#2-test-part-a--direct-order-api-powershell-no-scripts) — PowerShell on **5280** |
+| **B** | MCP tool `order_api` | [§5](#5-run-and-test-the-mcp-server-part-b) — MCP client + Kong + API running |
+| **C** | Kong route `/api/orders`, rate limit **5/min** | [§3](#3-start-kong-rate-limit-5-reqmin), [§4](#4-test-part-c--api-via-kong-powershell-no-scripts) — PowerShell on **8000** |
+| **D** | Deliverables (code, schema, Kong YAML, screenshots) | [Screenshot checklist](#assignment-screenshot-checklist), [Submission checklist](#submission-checklist) |
+
+## Instructions to compile and run (for submission PDF)
+
+1. Open `OrderManagement.slnx` in Visual Studio (or use CLI below).
+2. Build: **Build → Build Solution** or `dotnet build OrderManagement.slnx`.
+3. Run **OrderApi** with profile **http** (see [§1](#1-run-the-order-api-backend)).
+4. Start Kong: `docker compose up -d` in the `kong` folder (see [§3](#3-start-kong-rate-limit-5-reqmin)).
+5. Test REST endpoints with PowerShell ([§2](#2-test-part-a--direct-order-api-powershell-no-scripts), [§4](#4-test-part-c--api-via-kong-powershell-no-scripts)).
+6. Register and exercise **OrderMcpServer** in an MCP client ([§5](#5-run-and-test-the-mcp-server-part-b)).
+7. Capture screenshots listed in [Assignment screenshot checklist](#assignment-screenshot-checklist).
+
+Keep the **OrderApi** process running in Visual Studio (or a dedicated terminal). Do not stop it while testing Kong or MCP.
+
 ## Build entire solution
 
 ```powershell
@@ -90,6 +111,28 @@ try {
   Invoke-RestMethod -Uri "http://localhost:5280/orders" -Method Post `
     -ContentType "application/json" `
     -Body '{"item":"Bad","quantity":0}'
+} catch {
+  $_.Exception.Response.StatusCode.value__
+}
+```
+
+**Validation: missing or empty item** (expect HTTP `400`):
+
+```powershell
+try {
+  Invoke-RestMethod -Uri "http://localhost:5280/orders" -Method Post `
+    -ContentType "application/json" `
+    -Body '{"item":"","quantity":1}'
+} catch {
+  $_.Exception.Response.StatusCode.value__
+}
+```
+
+**Invalid id on GET** (expect HTTP `400` if your API rejects `id < 1`):
+
+```powershell
+try {
+  Invoke-RestMethod -Uri "http://localhost:5280/orders/0" -Method Get
 } catch {
   $_.Exception.Response.StatusCode.value__
 }
@@ -205,12 +248,20 @@ Full checklist script: `scripts/test-question2-assignment.ps1`
 
 `OrderMcpServer` calls the API via Kong (`OrderApi:BaseUrl` in `OrderMcpServer/appsettings.json`, default `http://localhost:8000/api/orders`).
 
+**Prerequisites:** Order API on **5280** and Kong on **8000** must both be running. Verify Kong before MCP:
+
+```powershell
+Invoke-RestMethod -Uri "http://localhost:8000/api/orders" -Method Get
+```
+
 **Start Order API and Kong first**, then:
 
 ```powershell
 cd "D:\Bits-pilani\API\OrderManagement\OrderMcpServer"
 dotnet run
 ```
+
+**Visual Studio:** use MCP configuration (solution `.mcp.json` or VS MCP settings) with the same `dotnet run --project` args as below.
 
 Register in an MCP client (e.g. Cursor / Claude Desktop / Visual Studio) as a stdio server:
 
